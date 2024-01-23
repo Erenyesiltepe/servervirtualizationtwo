@@ -1,0 +1,46 @@
+{
+  "name": "servervirtualizationtwo",
+  "publisher": "HAVELSAN A.\u015e.",
+  "version": "DEVELOPMENT",
+  "version_code": 1.6,
+  "database": [
+    {
+      "variable": "username",
+      "type": "text",
+      "name": "Kullan\u0131c\u0131 Ad\u0131",
+      "required": true,
+      "global": true,
+      "writable": true
+    },
+    {
+      "variable": "password",
+      "type": "password",
+      "name": "Parola",
+      "required": true,
+      "global": true,
+      "writable": true
+    }
+  ],
+  "widgets": [],
+  "language": "php",
+  "status": 0,
+  "service": "8080",
+  "supportedLiman": "635",
+  "support": "aciklab@havelsan.com.tr",
+  "icon": "box-archive",
+  "require_key": "false",
+  "dependencies": null,
+  "sslPorts": null,
+  "display_name": "3d virtualization2",
+  "functions": [],
+  "vite": true,
+  "skeleton": true,
+  "preload": true,
+  "verification": "verify",
+  "menus": [
+    {
+      "name": "3d Virtualization",
+      "url": "#/virtualization"
+    }
+  ]
+}

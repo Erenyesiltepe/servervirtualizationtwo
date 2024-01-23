@@ -1,0 +1,119 @@
+<script setup lang="ts">
+import { ref } from "vue"
+import emitter from "@/utils/emitter"
+import { useSceneStore } from "@/stores/scene"
+import { ObjectLoader, Scene } from "three/src/Three.js"
+import PMesh from "@/commons/PMesh"
+
+const sceneInstance = ref()
+emitter.on("sceneInstance", (scene: Scene) => {
+  sceneInstance.value = scene
+})
+
+const objname = ref()
+const selectedSceneName = ref("Select A Scene")
+const newSceneName = ref("")
+const options = ref()
+const store = useSceneStore()
+
+//getNames()
+
+function getNames() {
+  store.fetchSceneNames().then(() => {
+    options.value = store.getScenes.map((element: string) => {
+      return { label: element, key: element }
+    })
+  })
+}
+
+function cleanScene() {
+  while (sceneInstance.value.children.length > 0) {
+    var obj = sceneInstance.value.children[0]
+    sceneInstance.value.remove(obj)
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+var scenes = {}
+
+function loadScene() {
+  cleanScene()
+  // @ts-ignore
+  const objects = scenes[selectedSceneName.value]
+  const loader = new ObjectLoader()
+  objects.forEach((obj: any) => {
+    if (Object.prototype.hasOwnProperty.call(obj, "name")) {
+      const rack = new PMesh(obj.name)
+      rack.load(obj)
+      sceneInstance.value.add(rack)
+    } else {
+      const iobj = loader.parse(obj)
+      sceneInstance.value.add(iobj)
+    }
+  })
+  emitter.emit("sceneReload")
+  /*   store.fetchScene(selectedSceneName.value).then(() => {
+    cleanScene()
+    const objects = store.getScene
+    const loader = new ObjectLoader()
+    objects.forEach((obj: any) => {
+      if (Object.prototype.hasOwnProperty.call(obj, "name")) {
+        const rack = new PMesh(obj.name)
+        rack.load(obj)
+        sceneInstance.value.add(rack)
+      } else {
+        const iobj = loader.parse(obj)
+        sceneInstance.value.add(iobj)
+      }
+    })
+    emitter.emit("sceneReload")
+  }) */
+}
+
+function saveScene() {
+  /* const objects = []
+  for (let i = 0; i < sceneInstance.value.children.length; i++) {
+    objects.push(sceneInstance.value.children[i].toJSON())
+  }
+  store.saveScene(objects, newSceneName.value).then(() => {
+    getNames()
+  }) */
+  const objects = []
+  for (let i = 0; i < sceneInstance.value.children.length; i++) {
+    objects.push(sceneInstance.value.children[i].toJSON())
+  }
+  // @ts-ignore
+  scenes[newSceneName.value] = objects
+  options.value = Object.keys(scenes).map((element: string) => {
+    return { label: element, key: element }
+  })
+}
+</script>
+<template>
+  <n-space justify="space-between">
+    <n-space>
+      <n-input v-model:value="objname" type="text" placeholder="Object Name"></n-input>
+      <n-button @click="sceneInstance.add(new PMesh(objname))"
+        ><i class="fa-solid fa-plus"></i
+      ></n-button>
+    </n-space>
+    <n-space>
+      <n-dropdown
+        :options="options"
+        @select="
+          (key: string) => {
+            selectedSceneName = key
+          }
+        "
+        ><n-button>{{ selectedSceneName }}</n-button></n-dropdown
+      >
+      <n-button v-if="selectedSceneName != ''" @click="loadScene">load</n-button>
+      <n-input
+        v-model:value="newSceneName"
+        type="text"
+        placeholder="Enter new scene name"
+      ></n-input>
+      <n-button @click="saveScene">save</n-button>
+    </n-space>
+  </n-space>
+</template>

@@ -1,0 +1,149 @@
+{
+  "repo": "Nexus Depo Yönetimi",
+  "common": {
+    "confirm": "Onayla",
+    "success": "Başarılı",
+    "error": "Hata",
+    "warning": "Uyarı",
+    "refresh": "Yenile",
+    "are_you_sure": "Bu işlemi gerçekleştirmek istediğinize emin misiniz?",
+    "yes": "Evet",
+    "no": "Hayır",
+    "copy": "Kopyala",
+    "copied": "Panoya kopyalandı",
+    "check_the_fields": "Devam etmek için eksik alanları kontrol ediniz.",
+    "ok": "TAMAM",
+    "prev": "Önceki",
+    "next": "Sonraki",
+    "save": "Kaydet",
+    "leftp": "(",
+    "rightp": ")",
+    "dash": "-",
+    "pdf": "PDF",
+    "csv": "CSV",
+    "upload": {
+      "header_text": "Yüklemek için bu alana dosyanızı sürükleyebilirsiniz",
+      "sub_text": "Gizli bilgilerinizi yüklemediğinize emin olun. Örnek olarak, şifreler, kredi kartı numaraları, sosyal güvenlik numaraları, vb."
+    },
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "create": "Oluştur",
+    "toggle-on": "Aktif Et",
+    "toggle-off": "Pasif Et",
+    "stop": "Durdur"
+  },
+  "table": {
+    "filter": {
+      "placeholder": "Arama...",
+      "clear": "Temizle",
+      "apply": "Uygula"
+    },
+    "search": {
+      "placeholder": "Arama..."
+    }
+  },
+  "drawers": {
+    "install": "Paket Yükle",
+    "update": "Paketi Güncelle",
+    "create_server": "Server Oluştur",
+    "edit_server": "Serveri Güncelle",
+    "package_type": "Paket Tipi",
+    "name": "Ad",
+    "blob_name": "Blobtore Adı",
+    "distribution": "Dağıtım",
+    "signing_key": "İmza Anahtarı",
+    "passphrase": "Parola",
+    "proxy_url": "Proxy Linki",
+    "create": "Oluştur",
+    "edit": "Değiştir"
+  },
+  "nexus": {
+    "test": {
+      "columns": {
+        "name": "Depo Adı",
+        "format": "Format",
+        "type": "Depo Tipi",
+        "operations": "Operasyonlar",
+        "enable_anon_pull": "Docker Anonim Çekme",
+        "push_url": "Push Url"
+      },
+      "errors": {
+        "repo_fetch": "Depo yüklenirken hata oluştu",
+        "blob_fetch": "Blob store yüklenirken hata oluştu",
+        "distribution_fetch": "Depo dağılımları yüklenirken hata oluştu",
+        "asset_fetch": "Asset'ler yüklenirken hata oluştu",
+        "repo_create_success": "Depo başarıyla oluşturuldu",
+        "repo_create_fail": "Depo oluştulamadı",
+        "repo_update_success": "Depo başarıyla güncellendi",
+        "repo_update_fail": "Depo güncellenemedi",
+        "repo_delete_success": "Depo başarıyla silindi",
+        "repo_delete_fail": "Depo silinemedi"
+      }
+    }
+  },
+  "ldap_server": {
+    "protocol": "Protokol",
+    "host": "Ana Makina",
+    "ldap_on": "Ldap açık",
+    "ldap_off": "Ldap kapalı",
+    "dn": "Arama Tabanı",
+    "auth_uname": "Giriş Kullanıcı Adı",
+    "password": "Parola",
+    "errors": {
+      "fetch_servers": "Sunucular yüklenirken hata oluştu",
+      "fetch_active": "Ldap bilgili yüklenirken hata oluştu",
+      "server_update": "Ldap sunucu bilgileri güncellenirken hata oluştu",
+      "server_create": "Ldap sunucusu eklenirken hata oluştu"
+    }
+  },
+  "users": {
+    "columns": {
+      "id": "Kullanıcı Kimliği",
+      "first_name": "Ad",
+      "last_name": "Soyad",
+      "source": "Kaynak"
+    },
+    "roleedit": {
+      "error": "En az bir rol seçilmeli",
+      "errorr": "Yoda:Seçilmeli en az bir rol",
+      "available_roles": "Alınabilir Roller",
+      "active_roles": "Aktif Roller",
+      "apply": "Uygula",
+      "edit_roles_heading": "Rolleri Düzenle"
+    },
+    "info": {
+      "user_fetch_error": "Kullanıcı bilgileri yüklenemedi",
+      "user_update_success": "Kullanıcı bilgileri başarıyla güncellendi",
+      "user_update_error": "Kullanıcı bilgileri güncellenemedi",
+      "role_fetch_error": "Rol bilgileri yüklenirken hata oluştu"
+    }
+  },
+  "welcome": "Repository Manager a hoşgeldiniz",
+  "asset": {
+    "name": "Dosya Adı",
+    "pull_url": "Docker Çekme Linki",
+    "file_size": "Dosya Boyutu (Byte)"
+  },
+  "setting": {
+    "attribute": "Birim",
+    "value": "Değer"
+  },
+  "pages": {
+    "welcome": "Hoşgeldiniz",
+    "nexus": "Nexus",
+    "ldap": "Ldap",
+    "users": "Kullanıcılar"
+  },
+  "repo_type": "Depo Tipi",
+  "repo_count": "Depo Sayısı",
+  "tips": {
+    "delete_repo": "Depoyu sil",
+    "update_repo": "Depoyu güncelle",
+    "show_repo_settings": "Depo ayarlarını göster",
+    "create_repo": "Depo Oluştur",
+    "ldap_create": "Ldap sunucusu ekle",
+    "ldap_edit": "Ldap sunucusunu düzenle",
+    "users_edit_role": "Kullanıcı izinlerini düzenle",
+    "go_to": "Gitmek için tıklayın: "
+  }
+}
