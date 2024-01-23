@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
-    "preview": "vite preview",
+    "build": "rimraf ../public/vite && run-p type-check build-only",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
@@ -23,7 +22,8 @@
     "vue": "^3.3.11",
     "vue-error-boundary": "^2.0.1",
     "vue-i18n": "^9.9.0",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "rimraf": "^5.0.5"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.6.1",
