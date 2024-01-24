@@ -87,6 +87,7 @@ function saveScene() {
   options.value = Object.keys(scenes).map((element: string) => {
     return { label: element, key: element }
   })
+  console.log(sceneInstance.value.toJSON())
 }
 </script>
 <template>
