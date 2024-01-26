@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import emitter from "@/utils/emitter"
-//import { useSceneStore } from "@/stores/scene"
+import { useSceneStore } from "@/stores/scene"
 import { ObjectLoader } from "three/src/Three.js"
-import data from "./test.json"
 
 const sceneInstance = ref()
 const rackControllerInstance = ref()
@@ -16,17 +15,17 @@ const objname = ref()
 const selectedSceneName = ref("Select A Scene")
 const newSceneName = ref("")
 const options = ref()
-//const store = useSceneStore()
+const store = useSceneStore()
 
-//getNames()
+getNames()
 
-/* function getNames() {
+function getNames() {
   store.fetchSceneNames().then(() => {
     options.value = store.getScenes.map((element: string) => {
       return { label: element, key: element }
     })
   })
-} */
+}
 
 function cleanScene() {
   while (sceneInstance.value.children.length > 0) {
@@ -40,9 +39,9 @@ var scenes = {}
 
 function loadScene() {
   cleanScene()
-  const loader = new ObjectLoader()
+  /*const loader = new ObjectLoader()
   sceneInstance.value.add(loader.parse(data))
-  /*  // @ts-ignore
+    // @ts-ignore
   const objects = scenes[selectedSceneName.value]
   const loader = new ObjectLoader()
   objects.forEach((obj: any) => {
@@ -56,22 +55,14 @@ function loadScene() {
     }
   })
   emitter.emit("sceneReload") */
-  /*   store.fetchScene(selectedSceneName.value).then(() => {
+  store.fetchScene(selectedSceneName.value).then(() => {
     cleanScene()
     const objects = store.getScene
     const loader = new ObjectLoader()
-    objects.forEach((obj: any) => {
-      if (Object.prototype.hasOwnProperty.call(obj, "name")) {
-        const rack = new PMesh(obj.name)
-        rack.load(obj)
-        sceneInstance.value.add(rack)
-      } else {
-        const iobj = loader.parse(obj)
-        sceneInstance.value.add(iobj)
-      }
-    })
+    const iobj = loader.parse(objects)
+    sceneInstance.value.add(iobj)
     emitter.emit("sceneReload")
-  }) */
+  })
 }
 
 function saveScene() {

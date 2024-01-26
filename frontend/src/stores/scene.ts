@@ -1,4 +1,4 @@
-/* import { HttpClient } from "@/utils/http-common"
+import { HttpClient } from "@/utils/http-common"
 import { defineStore } from "pinia"
 
 const http = new HttpClient("sceneProxy")
@@ -53,4 +53,3 @@ export const useSceneStore = defineStore({
     }
   }
 })
- */
