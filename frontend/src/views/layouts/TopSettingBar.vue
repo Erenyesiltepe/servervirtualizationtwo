@@ -66,13 +66,9 @@ function loadScene() {
 }
 
 function saveScene() {
-  /* const objects = []
-  for (let i = 0; i < sceneInstance.value.children.length; i++) {
-    objects.push(sceneInstance.value.children[i].toJSON())
-  }
-  store.saveScene(objects, newSceneName.value).then(() => {
+  store.saveScene(sceneInstance.value.toJSON(), newSceneName.value).then(() => {
     getNames()
-  }) */
+  })
   /*   const objects = []
   for (let i = 0; i < sceneInstance.value.children.length; i++) {
     objects.push(sceneInstance.value.children[i].toJSON())
