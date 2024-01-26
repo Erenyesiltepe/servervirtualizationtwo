@@ -10,5 +10,13 @@ export default defineConfig({
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url))
     }
+  },
+  build: {
+    manifest: true,
+    rollupOptions: {
+      input: "src/main.ts"
+    },
+    outDir: "../public/vite",
+    chunkSizeWarningLimit: 999999999
   }
 })

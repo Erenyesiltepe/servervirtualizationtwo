@@ -28,7 +28,7 @@ watch(
 
 const goBackToMainPage = () => {
   router.push({
-    name: "virtualization",
+    name: "virtualization"
   })
 }
 </script>
@@ -37,14 +37,8 @@ const goBackToMainPage = () => {
   <div class="header_bg">
     <n-config-provider>
       <n-space class="mb-3" vertical>
-        <n-breadcrumb
-          separator="&raquo;"
-          class="ml-n1"
-          @click="goBackToMainPage"
-        >
-          <n-breadcrumb-item
-            ><i class="fa-solid fa-home"></i
-          ></n-breadcrumb-item>
+        <n-breadcrumb separator="&raquo;" class="ml-n1" @click="goBackToMainPage">
+          <n-breadcrumb-item><i class="fa-solid fa-home"></i></n-breadcrumb-item>
           <n-breadcrumb-item>
             {{ t("pages." + route.name?.toString()) }}
           </n-breadcrumb-item>

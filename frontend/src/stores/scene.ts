@@ -31,14 +31,12 @@ export const useSceneStore = defineStore({
       return http.get("scene", { data: JSON.stringify(name) }).then((res: any) => {
         if (res.status == 200) {
           this.scene = res.data
-          console.log(res.data)
         } else {
           console.log(res.data)
         }
       })
     },
     async saveScene(scene: any, name: string) {
-      console.log(scene)
       return http
         .post("scene", {
           data: JSON.stringify({ scene: scene, name: name })

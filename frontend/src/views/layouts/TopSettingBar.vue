@@ -34,27 +34,7 @@ function cleanScene() {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-var scenes = {}
-
 function loadScene() {
-  cleanScene()
-  /*const loader = new ObjectLoader()
-  sceneInstance.value.add(loader.parse(data))
-    // @ts-ignore
-  const objects = scenes[selectedSceneName.value]
-  const loader = new ObjectLoader()
-  objects.forEach((obj: any) => {
-    if (Object.prototype.hasOwnProperty.call(obj, "name")) {
-      const rack = new PMesh(obj.name)
-      rack.load(obj)
-      sceneInstance.value.add(rack)
-    } else {
-      const iobj = loader.parse(obj)
-      sceneInstance.value.add(iobj)
-    }
-  })
-  emitter.emit("sceneReload") */
   store.fetchScene(selectedSceneName.value).then(() => {
     cleanScene()
     const objects = store.getScene
@@ -69,16 +49,6 @@ function saveScene() {
   store.saveScene(sceneInstance.value.toJSON(), newSceneName.value).then(() => {
     getNames()
   })
-  /*   const objects = []
-  for (let i = 0; i < sceneInstance.value.children.length; i++) {
-    objects.push(sceneInstance.value.children[i].toJSON())
-  }
-  // @ts-ignore
-  scenes[newSceneName.value] = objects
-  options.value = Object.keys(scenes).map((element: string) => {
-    return { label: element, key: element }
-  }) */
-  console.log(sceneInstance.value.toJSON())
 }
 </script>
 <template>

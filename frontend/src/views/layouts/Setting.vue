@@ -9,7 +9,7 @@ const obj = ref()
 const name = ref("null")
 const selected = ref(1)
 const image = ref()
-//const color=ref()
+
 emitter.on("setting", (object: any) => {
   active.value = true
   obj.value = object.selected
