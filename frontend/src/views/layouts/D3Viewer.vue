@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { onMounted } from "vue"
 import SceneInit from "@/commons/SceneInit"
-import { Raycaster, Vector2, MeshStandardMaterial } from "three"
+import { Raycaster, Vector2, Mesh } from "three"
 import emitter from "@/utils/emitter"
+import RackController from "@/commons/RackController"
 
 onMounted(() => {
   const scene = new SceneInit("d3space")
+  const rackController = new RackController()
   scene.initialize()
   scene.animate()
   scene.createEmptyScene()
-  emitter.emit("sceneInstance", scene.scene)
+  emitter.emit("sceneInstance", { scene: scene.scene, rackController: rackController })
   emitter.on("sceneReload", () => {
     scene.animate()
   })
@@ -22,26 +24,7 @@ onMounted(() => {
   const element = document.getElementById("d3space")
 
   if (element != null) {
-    const onClick = (event: any) => {
-      // calculate pointer position in normalized device coordinates
-      // (-1 to +1) for both components
-      const offset = element.getBoundingClientRect()
-      pointer.x = ((event.clientX - offset.left) / element.clientWidth) * 2 - 1
-      pointer.y = -((event.clientY - offset.top) / element.clientHeight) * 2 + 1
-
-      raycaster.setFromCamera(pointer, scene.camera)
-      const intersects = raycaster.intersectObjects(scene.scene.children)
-
-      // change color of the closest object intersecting the raycaster
-      if (intersects.length > 0) {
-        const selected = intersects[0].object
-        if (selected.name.includes("rack")) {
-          // @ts-ignore
-          emitter.emit("setting", { selected: selected, boundary: scene.boundary })
-        }
-      }
-    }
-    const onMouseMove = (event: any) => {
+    const getIntersects = (event: any) => {
       // calculate pointer position in normalized device coordinates
       // (-1 to +1) for both components
       const offset = element.getBoundingClientRect()
@@ -52,23 +35,38 @@ onMounted(() => {
       pointer.y = -(cy / element.clientHeight) * 2 + 1
 
       raycaster.setFromCamera(pointer, scene.camera)
-      const intersects = raycaster.intersectObjects(scene.scene.children)
+      return raycaster.intersectObjects(scene.scene.children)
+    }
+
+    const onClick = (event: any) => {
+      const intersects = getIntersects(event)
 
       // change color of the closest object intersecting the raycaster
       if (intersects.length > 0) {
         const selected = intersects[0].object
-        // @ts-ignore
-        if (selected.name.includes("rack") && !selected.numberMaterialOn) {
-          // @ts-ignore
-          selected.material = new MeshStandardMaterial({ color: 0x00ffff })
-          //change old selectedRack to normal
-          if (selectedRack != null && selected != selectedRack && !selectedRack.numberMaterialOn) {
-            selectedRack.material = selectedRack.defaultMaterial
+        if (selected.name.includes("rack")) {
+          emitter.emit("setting", { selected: selected, boundary: scene.boundary })
+        }
+      }
+    }
+    const onMouseMove = (event: any) => {
+      const intersects = getIntersects(event)
+
+      // change color of the closest object intersecting the raycaster
+      if (intersects.length > 0) {
+        const selected = intersects[0].object
+        if (selected.name.includes("rack")) {
+          if (selectedRack != null && selectedRack != selected) {
+            rackController.setDefaultMaterial(selectedRack as Mesh)
           }
+          rackController.setHoverMaterial(selected as Mesh)
           selectedRack = selected
-        } else {
-          if (selectedRack != null && !selectedRack.numberMaterialOn)
-            selectedRack.material = selectedRack.defaultMaterial
+        } else if (selectedRack != null && !rackController.checkNumberMaterial(selectedRack)) {
+          rackController.setDefaultMaterial(selectedRack)
+        }
+      } else {
+        if (selectedRack != null && !rackController.checkNumberMaterial(selectedRack)) {
+          rackController.setDefaultMaterial(selectedRack as Mesh)
         }
       }
     }

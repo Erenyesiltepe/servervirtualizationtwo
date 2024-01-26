@@ -2,6 +2,7 @@
 import { ref } from "vue"
 import emitter from "@/utils/emitter"
 import type { UploadCustomRequestOptions } from "naive-ui"
+const rackController = ref()
 const boundaries = ref({ x: 1, y: 1, z: 1 })
 const active = ref(false)
 const obj = ref()
@@ -14,6 +15,9 @@ emitter.on("setting", (object: any) => {
   obj.value = object.selected
   name.value = obj.value.name
   boundaries.value = object.boundary
+})
+emitter.on("sceneInstance", (obj: any) => {
+  rackController.value = obj.rackController
 })
 
 const options = ref([
@@ -42,6 +46,14 @@ const customRequest = ({ file }: UploadCustomRequestOptions) => {
 function removeObj() {
   obj.value.parent.remove(obj.value)
   active.value = false
+}
+
+function numberSet() {
+  if (rackController.value.checkNumberMaterial(obj.value)) {
+    rackController.value.setDefaultMaterial(obj.value)
+  } else {
+    rackController.value.setNumberMaterial(obj.value)
+  }
 }
 </script>
 <template>
@@ -133,7 +145,7 @@ function removeObj() {
               <n-color-picker
                 :on-update:value="
                   (value: string) => {
-                    obj.updateColor(value)
+                    rackController.updateColor(obj, value)
                   }
                 "
                 :show-alpha="false"
@@ -141,7 +153,7 @@ function removeObj() {
             </n-form-item>
             <n-form-item label="texture">
               <n-space>
-                <n-button @click="obj.toggleNumberMaterial()">toggle</n-button>
+                <n-button @click="numberSet">toggle</n-button>
                 <n-dropdown
                   :options="options"
                   @select="
@@ -155,7 +167,9 @@ function removeObj() {
                 <n-upload response-type="blob" :customRequest="customRequest">
                   <n-button>Upload</n-button>
                 </n-upload>
-                <n-button @click="obj.addTextureToSelected(selected, image)">Apply</n-button>
+                <n-button @click="rackController.addTextureToSelected(obj, selected, image)"
+                  >Apply</n-button
+                >
               </n-space>
             </n-form-item>
           </n-collapse-item>

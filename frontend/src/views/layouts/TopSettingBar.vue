@@ -2,13 +2,14 @@
 import { ref } from "vue"
 import emitter from "@/utils/emitter"
 //import { useSceneStore } from "@/stores/scene"
-import { ObjectLoader, Scene } from "three/src/Three.js"
-import PMesh from "@/commons/PMesh"
-import { scenejson } from "./SceneJson"
+import { ObjectLoader } from "three/src/Three.js"
+import data from "./test.json"
 
 const sceneInstance = ref()
-emitter.on("sceneInstance", (scene: Scene) => {
-  sceneInstance.value = scene
+const rackControllerInstance = ref()
+emitter.on("sceneInstance", (obj: any) => {
+  sceneInstance.value = obj.scene
+  rackControllerInstance.value = obj.rackController
 })
 
 const objname = ref()
@@ -40,7 +41,7 @@ var scenes = {}
 function loadScene() {
   cleanScene()
   const loader = new ObjectLoader()
-  sceneInstance.value.add(loader.parse(scenejson))
+  sceneInstance.value.add(loader.parse(data))
   /*  // @ts-ignore
   const objects = scenes[selectedSceneName.value]
   const loader = new ObjectLoader()
@@ -81,7 +82,7 @@ function saveScene() {
   store.saveScene(objects, newSceneName.value).then(() => {
     getNames()
   }) */
-  const objects = []
+  /*   const objects = []
   for (let i = 0; i < sceneInstance.value.children.length; i++) {
     objects.push(sceneInstance.value.children[i].toJSON())
   }
@@ -89,7 +90,7 @@ function saveScene() {
   scenes[newSceneName.value] = objects
   options.value = Object.keys(scenes).map((element: string) => {
     return { label: element, key: element }
-  })
+  }) */
   console.log(sceneInstance.value.toJSON())
 }
 </script>
@@ -97,7 +98,7 @@ function saveScene() {
   <n-space justify="space-between">
     <n-space>
       <n-input v-model:value="objname" type="text" placeholder="Object Name"></n-input>
-      <n-button @click="sceneInstance.add(new PMesh(objname))"
+      <n-button @click="sceneInstance.add(rackControllerInstance.createRack(objname))"
         ><i class="fa-solid fa-plus"></i
       ></n-button>
     </n-space>
