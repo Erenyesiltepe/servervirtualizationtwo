@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import emitter from "@/utils/emitter"
-import { useSceneStore } from "@/stores/scene"
+//import { useSceneStore } from "@/stores/scene"
 import { ObjectLoader, Scene } from "three/src/Three.js"
 import PMesh from "@/commons/PMesh"
+import { scenejson } from "./SceneJson"
 
 const sceneInstance = ref()
 emitter.on("sceneInstance", (scene: Scene) => {
@@ -14,17 +15,17 @@ const objname = ref()
 const selectedSceneName = ref("Select A Scene")
 const newSceneName = ref("")
 const options = ref()
-const store = useSceneStore()
+//const store = useSceneStore()
 
 //getNames()
 
-function getNames() {
+/* function getNames() {
   store.fetchSceneNames().then(() => {
     options.value = store.getScenes.map((element: string) => {
       return { label: element, key: element }
     })
   })
-}
+} */
 
 function cleanScene() {
   while (sceneInstance.value.children.length > 0) {
@@ -38,7 +39,9 @@ var scenes = {}
 
 function loadScene() {
   cleanScene()
-  // @ts-ignore
+  const loader = new ObjectLoader()
+  sceneInstance.value.add(loader.parse(scenejson))
+  /*  // @ts-ignore
   const objects = scenes[selectedSceneName.value]
   const loader = new ObjectLoader()
   objects.forEach((obj: any) => {
@@ -51,7 +54,7 @@ function loadScene() {
       sceneInstance.value.add(iobj)
     }
   })
-  emitter.emit("sceneReload")
+  emitter.emit("sceneReload") */
   /*   store.fetchScene(selectedSceneName.value).then(() => {
     cleanScene()
     const objects = store.getScene

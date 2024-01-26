@@ -71,7 +71,7 @@ export default class PMesh extends Mesh {
     }
   }
 
-  toJSON() {
+  /*  toJSON() {
     // Call the base class's toJSON method to get the default representation
     return {
       scale: { x: this.scale.x, y: this.scale.y, z: this.scale.z },
@@ -84,7 +84,7 @@ export default class PMesh extends Mesh {
       name: this.name,
       material: this.material
     }
-  }
+  } */
 
   load(json: any) {
     this.scale.x = json.scale.x

@@ -1,4 +1,4 @@
-import type { IData } from "@/models/Data"
+/* import type { IData } from "@/models/Data"
 import type { AxiosInstance } from "axios"
 import { useLoadingBar } from "naive-ui"
 import type { LoadingBarInst } from "naive-ui/es/loading-bar/src/LoadingBarProvider"
@@ -116,3 +116,4 @@ export class HttpClient {
 export const http = new HttpClient()
 
 export default http
+ */
