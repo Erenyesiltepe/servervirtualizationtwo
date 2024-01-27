@@ -89,10 +89,7 @@ export default class RackController {
         const texture = loader.load(itexture)
         materiala.push(new MeshStandardMaterial({ map: texture }))
       } else {
-        if (
-          Array.isArray(this.defaultMaterial) &&
-          (this.defaultMaterial[i - 1] as MeshStandardMaterial)?.map != undefined
-        ) {
+        if (Array.isArray(this.defaultMaterial)) {
           materiala.push(this.defaultMaterial[i - 1])
         } else {
           materiala.push(this.defaultMaterial)
