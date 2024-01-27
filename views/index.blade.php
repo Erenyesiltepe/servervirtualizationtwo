@@ -4,7 +4,7 @@
     }
 </style>
 @php
-$manifest = file_get_contents(getPath("/public/vite/.vite/manifest.json"));
+$manifest = file_get_contents(getPath("/public/vite/manifest.json"));
 $manifest = json_decode($manifest, true);
 @endphp
 
