@@ -1,6 +1,4 @@
-<video controls width="1000">
-  <source src="./virtualization sample.mp4" type="video/mp4" />
-</video>
+
 
 ## Server Virtualization Using Three.js
 
@@ -8,3 +6,7 @@
 
 build: cd frontend && pnpm i && pnpm build </br>
 dev: cd frontend && pnpm i && pnpm dev
+
+
+https://github.com/Erenyesiltepe/servervirtualizationtwo/assets/91269432/6ab96194-7ccc-4531-b126-57c59446d5c9
+
